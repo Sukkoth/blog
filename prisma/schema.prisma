@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String?
+  email     String   @unique
+  password  String
+  avatarImg String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  blogs     Blogs[]
+}
+
+model Blogs {
+  id        Int      @id @default(autoincrement())
+  title     String
+  body      String
+  authorId  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  author    Users    @relation(fields: [authorId], references: [id])
+
+  tags       BlogTags[]
+  categoryId Int
+  category   Category?  @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  blogs       Blogs[]
+
+  tags CategoryTags[]
+}
+
+model Tags {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+
+  blogs      BlogTags[]
+  categories CategoryTags[]
+}
+
+model BlogTags {
+  id     Int    @id @default(autoincrement())
+  blogId Int
+  tagId  Int
+  blogs  Blogs? @relation(fields: [blogId], references: [id])
+  tags   Tags?  @relation(fields: [tagId], references: [id])
+}
+
+model CategoryTags {
+  id         Int       @id @default(autoincrement())
+  tagId      Int
+  categoryId Int
+  tags       Tags?     @relation(fields: [tagId], references: [id])
+  category   Category? @relation(fields: [categoryId], references: [id])
+}

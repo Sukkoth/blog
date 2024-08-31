@@ -1,3 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  @apply bg-stone-900 text-white;
+}
+
+.dropcap:first-letter {
+  float: left;
+  font-size: 3.6355864383rem;
+  line-height: 0.7;
+  margin-right: 0.6rem;
+  padding: calc(var(--baseline) * 2) calc(var(--baseline) * 2)
+    calc(var(--baseline) * 2) 0;
+  @apply text-gray-300;
+}
+
+nav .active {
+  @apply underline;
+}

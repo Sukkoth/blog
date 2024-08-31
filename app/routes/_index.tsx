@@ -1,48 +1,45 @@
 import type { MetaFunction } from "@remix-run/node";
+import BlogItem from "~/components/BlogItem";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Bloggy" },
+    { name: "Blogs worth your time", content: "Welcome to Bloggy!" },
   ];
 };
 
 export default function Index() {
   return (
-    <div className="font-sans p-4">
-      <h1 className="text-3xl">Welcome to Remix</h1>
-      <ul className="list-disc mt-4 pl-6 space-y-2">
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/quickstart"
-            rel="noreferrer"
-          >
-            5m Quick Start
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/tutorial"
-            rel="noreferrer"
-          >
-            30m Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/docs"
-            rel="noreferrer"
-          >
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div>
+      <div className='mt-16 w-[45%] mx-auto'>
+        <h1 className='font-serif text-start text-4xl font-medium '>
+          Discover My Blogging Journey: Adventures, Travels, and Hobbies!
+        </h1>
+        <p className='text-xs text-gray-400 pt-5 font-serif'>
+          Join me as I share captivating stories, travel experiences, and dive
+          into the joys of my favorite hobbies.
+        </p>
+
+        <button className='px-3 py-[8px] rounded-3xl border border-slate-200 text-gray-200 text-[10px] mt-5 hover:bg-stone-300 hover:text-black transition-colors duration-300'>
+          Read more
+        </button>
+      </div>
+
+      <div className='w-[90%] mx-auto h-[28rem] mt-20 rounded-xl overflow-hidden'>
+        <img
+          className='h-full w-full object-cover'
+          src='https://demo.getpublii.eu/themes/simple/v3/media/website/responsive/christopher-ruel-cvw75oY6Mjc-unsplash-2xl.webp'
+          alt='Blog'
+        />
+      </div>
+
+      <div className='w-fit mx-auto pt-20 space-y-12'>
+        <BlogItem />
+        <BlogItem />
+        <BlogItem />
+        <BlogItem />
+        <BlogItem />
+      </div>
     </div>
   );
 }
