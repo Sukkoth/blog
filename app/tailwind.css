@@ -22,3 +22,8 @@ html {
 nav .active {
   @apply underline;
 }
+
+select option {
+  background: rgba(0, 0, 0, 0.977);
+  color: #fff;
+}

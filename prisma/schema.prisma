@@ -14,6 +14,7 @@ model Users {
   email     String   @unique
   password  String
   avatarImg String?
+  about     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   blogs     Blogs[]
@@ -59,8 +60,8 @@ model BlogTags {
   id     Int    @id @default(autoincrement())
   blogId Int
   tagId  Int
-  blogs  Blogs? @relation(fields: [blogId], references: [id])
-  tags   Tags?  @relation(fields: [tagId], references: [id])
+  blog   Blogs? @relation(fields: [blogId], references: [id])
+  tag    Tags?  @relation(fields: [tagId], references: [id])
 }
 
 model CategoryTags {

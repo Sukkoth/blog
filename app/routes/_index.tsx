@@ -1,5 +1,6 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import BlogItem from "~/components/BlogItem";
+import { requireUserId } from "~/utils/server/auth.server";
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,6 +8,11 @@ export const meta: MetaFunction = () => {
     { name: "Blogs worth your time", content: "Welcome to Bloggy!" },
   ];
 };
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  await requireUserId(request);
+  return null;
+}
 
 export default function Index() {
   return (
@@ -34,11 +40,11 @@ export default function Index() {
       </div>
 
       <div className='w-fit mx-auto pt-20 space-y-12'>
+        {/* <BlogItem />
         <BlogItem />
         <BlogItem />
         <BlogItem />
-        <BlogItem />
-        <BlogItem />
+        <BlogItem /> */}
       </div>
     </div>
   );

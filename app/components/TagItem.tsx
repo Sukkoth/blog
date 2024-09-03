@@ -1,6 +1,9 @@
 import { Link } from "@remix-run/react";
 
-function TagItem() {
+type Props = {
+  tag: Tag;
+};
+function TagItem({ tag }: Props) {
   return (
     <div className='flex items-center gap-8'>
       <div>
@@ -12,12 +15,14 @@ function TagItem() {
       </div>
       <div>
         <Link
-          to={`/tags/2`}
+          to={`/tags/${tag.id}`}
           className='text-xl text-blue-500 pb-3 hover:text-orange-300 cursor-pointer transition-colors duration-300'
         >
-          Adventure
+          {tag.name}
         </Link>
-        <p className='text-gray-400 text-xs pt-3'>Featuring 7 posts</p>
+        <p className='text-gray-400 text-xs pt-3'>
+          Featuring {tag._count?.blogs} posts
+        </p>
       </div>
     </div>
   );

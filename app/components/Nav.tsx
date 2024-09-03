@@ -1,6 +1,8 @@
-import { NavLink } from "@remix-run/react";
+import { NavLink, useLoaderData } from "@remix-run/react";
 
 function Nav() {
+  const user = useLoaderData<User>();
+
   return (
     <nav className='flex items-center justify-between py-3 px-200'>
       <h1>Bloggy</h1>
@@ -14,12 +16,20 @@ function Nav() {
         <li className='hover:text-gray-300'>
           <NavLink to={"/tags"}>Tags</NavLink>
         </li>
-        <li className='hover:text-gray-300'>
-          <NavLink to={"/login"}>Login</NavLink>
-        </li>
-        <li className='hover:text-gray-300'>
-          <NavLink to={"/register"}>Register</NavLink>
-        </li>
+        {user?.id ? (
+          <li className='hover:text-gray-300'>
+            <NavLink to={"/user"}>{user.firstName}</NavLink>
+          </li>
+        ) : (
+          <>
+            <li className='hover:text-gray-300'>
+              <NavLink to={"/login"}>Login</NavLink>
+            </li>
+            <li className='hover:text-gray-300'>
+              <NavLink to={"/register"}>Register</NavLink>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );

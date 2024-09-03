@@ -1,4 +1,17 @@
-import { Form, Link } from "@remix-run/react";
+import { LoaderFunction, LoaderFunctionArgs } from "@remix-run/node";
+import { Form, Link, redirect } from "@remix-run/react";
+import { getUser } from "~/utils/server/auth.server";
+
+//check logged in user
+export const loader: LoaderFunction = async ({
+  request,
+}: LoaderFunctionArgs) => {
+  const user = await getUser(request);
+  if (user) {
+    return redirect("/");
+  }
+  return null;
+};
 
 function Register() {
   return (

@@ -8,9 +8,16 @@ import {
 import styles from "./tailwind.css?url";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
+import { LoaderFunctionArgs } from "@remix-run/node";
+import { getUser } from "./utils/server/auth.server";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
+}
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const user = await getUser(request);
+  return user;
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
